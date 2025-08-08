@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Raksha Bandhan</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #FFD580, #FFB347);
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden; /* allow vertical scroll */
+    }
+    .card {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        max-width: 500px;
+        margin: 40px auto;
+        text-align: center;
+        animation: fadeIn 1.5s ease-in-out;
+        position: relative;
+        z-index: 2;
+    }
+    .card h1 {
+        color: #e76f51;
+        font-size: 36px;
+        font-family: 'Great Vibes', cursive;
+        animation: heartbeat 1.5s infinite;
+    }
+    .card h2 {
+        font-size: 20px;
+        color: #6d6875;
+        margin-top: 10px;
+    }
+    .card img {
+        width: 120px;
+        animation: glow 2s infinite alternate;
+    }
+    .card p {
+        font-size: 18px;
+        color: #444;
+        line-height: 1.6;
+        text-align: left;
+    }
+    .footer {
+        margin-top: 15px;
+        font-style: italic;
+        color: #6d6875;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.9); }
+        to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes glow {
+        0% { filter: drop-shadow(0 0 5px gold); }
+        100% { filter: drop-shadow(0 0 20px orange); }
+    }
+    @keyframes heartbeat {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+    }
+
+    /* Floating flowers */
+    .flower {
+        position: fixed;
+        top: -50px;
+        width: 40px;
+        z-index: 1;
+        animation: fall linear infinite;
+    }
+    @keyframes fall {
+        0% { transform: translateY(-50px) rotate(0deg); }
+        100% { transform: translateY(110vh) rotate(360deg); }
+    }
+
+    /* Mobile responsive adjustments */
+    @media (max-width: 600px) {
+        .card {
+            margin: 20px;
+            padding: 15px;
+        }
+        .card h1 {
+            font-size: 28px;
+        }
+        .card p {
+            font-size: 16px;
+        }
+    }
+</style>
+</head>
+<body>
+
+<!-- Background festive music -->
+<audio autoplay loop>
+    <source src="happy_mus.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Gift card content -->
+<div class="card">
+    <h1>Happy Raksha Bandhan!</h1>
+    <h2>To My Dear Sister Shobini🥳🥳</h2>
+    <p id="typedText"></p>
+    <p class="footer">— With love, Your Brother Srinath💛</p>
+</div>
+
+<!-- Confetti effect -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+<script>
+    function launchConfetti() {
+        var duration = 2 * 1000;
+        var end = Date.now() + duration;
+        (function frame() {
+            confetti({
+                particleCount: 5,
+                angle: 60,
+                spread: 55,
+                origin: { x: 0 }
+            });
+            confetti({
+                particleCount: 5,
+                angle: 120,
+                spread: 55,
+                origin: { x: 1 }
+            });
+            if (Date.now() < end) requestAnimationFrame(frame);
+        })();
+    }
+</script>
+
+<!-- Typing Effect for Multiple Paragraphs -->
+<script>
+    const paragraphs = [
+        `Today isn't just about siblings by blood it's about the connections that feel just as real, just as strong. 
+        You've stood by me like a sister would with care, kindness, and the kind of support that speaks volumes.`,
+
+        `On this Raksha Bandhan, I want you to know: you're not just a friend... you're family.`,
+
+        `Thank you for being the sister my heart chose.`,
+
+        `May your life be filled with happiness, love, and endless success. You truly deserve it all.`,
+
+        `With affection and respect, Always there for you`,
+
+    ];
+
+    const typedTextElem = document.getElementById("typedText");
+    let pIndex = 0, wIndex = 0;
+    let words = paragraphs[pIndex].split(" ");
+
+    function typeWord() {
+        if (wIndex < words.length) {
+            typedTextElem.innerHTML += words[wIndex] + " ";
+            wIndex++;
+            setTimeout(typeWord, 200); // typing speed per word
+        } else {
+            pIndex++;
+            if (pIndex < paragraphs.length) {
+                setTimeout(() => {
+                    typedTextElem.innerHTML += "<br><br>"; // paragraph break
+                    words = paragraphs[pIndex].split(" ");
+                    wIndex = 0;
+                    typeWord();
+                }, 600);
+            }
+        }
+    }
+
+    window.onload = () => {
+        launchConfetti();
+        typeWord();
+    };
+</script>
+
+</body>
+</html>
